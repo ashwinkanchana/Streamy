@@ -1,0 +1,20 @@
+{
+  "streams": [
+    {
+      "title": "test",
+      "description": "desc",
+      "id": 1
+    },
+    {
+      "title": "me edited",
+      "description": "lorem ipsum edited",
+      "id": 2
+    },
+    {
+      "title": "asdf",
+      "description": "adsf",
+      "userId": "106065399997186480548",
+      "id": 3
+    }
+  ]
+}
