@@ -1,5 +1,5 @@
 import React from 'react'
-import { Field, reduxForm } from 'redux-form'
+import { Field, Form } from 'react-final-form'
 
 
 class StreamForm extends React.Component {
@@ -35,36 +35,37 @@ class StreamForm extends React.Component {
 
     render() {
         return (
-            <div>
-                <form onSubmit={this.props.handleSubmit(this.onSubmit)} action="" className="ui form error">
-                    <Field name="title" label="Title" component={this.renderInput} />
-                    <Field name="description"
-                        label="Description"
-                        component={this.renderInput} />
-                    <button className="ui button primary">Submit</button>
-                </form>
-            </div>
+            <Form
+            initialValues={this.props.initialValues}
+                onSubmit={this.onSubmit}
+                validate={(formValues) => {
+                    const errors = {}
+                    if (!formValues.title) {
+                        errors.title = 'Please enter a title'
+                    }
+                    if (!formValues.description) {
+                        errors.description = 'Please enter a description'
+                    }
+
+                    return errors
+                }}
+                render={({ handleSubmit }) => (
+                    <form onSubmit={handleSubmit} className="ui form error">
+                        <Field name="title" component={this.renderInput} label="Title" />
+                        <Field
+                            name="description"
+                            component={this.renderInput}
+                            label="Description"
+                        />
+                        <button className="ui button primary">Submit</button>
+                    </form>
+                )}
+            />
 
         )
     }
-}
+} 
 
 
-const validate = (formValues) => {
-    const errors = {}
-    if (!formValues.title) {
-        errors.title = 'Please enter a title'
-    }
-    if (!formValues.description) {
-        errors.description = 'Please enter a description'
-    }
-
-    return errors
-}
-
-
-export default reduxForm({
-    form: 'StreamForm',
-    validate: validate
-})(StreamForm);
+export default StreamForm;
 
